@@ -7,13 +7,14 @@ import StatisticChartOrderMonthly from "@/components/statistic/StatisticChartOrd
 import StatisticDone from "@/components/statistic/StatisticDone";
 import StatisticMonth from "@/components/statistic/StatisticMonth";
 import StatisticToday from "@/components/statistic/StatisticToday";
+import { withAuth } from "@/lib/authorization";
 import {
     Container,
     Flex,
     Heading,
 } from "@chakra-ui/react";
 
-export default function Dashboard() {
+function Dashboard() {
     return (
         <>
             <HeadAdmin />
@@ -44,3 +45,4 @@ export default function Dashboard() {
     );
 }
 
+export default withAuth(Dashboard)

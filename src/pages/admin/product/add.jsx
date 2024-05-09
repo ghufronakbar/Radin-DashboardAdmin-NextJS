@@ -1,9 +1,10 @@
 import { HeadAdmin } from "@/components/HeadAdmin";
 import { NavbarAdmin } from "@/components/NavbarAdmin";
 import { FormProductAdd } from "@/components/form/FormProductAdd";
+import { withAuth } from "@/lib/authorization";
 import { Container } from "@chakra-ui/react";
 
-export default function ProductAdd() {
+function ProductAdd() {
   return (
     <>
       <HeadAdmin />
@@ -16,3 +17,5 @@ export default function ProductAdd() {
     </>
   );
 }
+
+export default withAuth(ProductAdd)

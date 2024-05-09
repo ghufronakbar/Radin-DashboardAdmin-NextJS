@@ -2,15 +2,14 @@
 import { HeadAdmin } from "@/components/HeadAdmin";
 import { NavbarAdmin } from "@/components/NavbarAdmin";
 import { TableOrders } from "@/components/table/TableOrders";
+import { withAuth } from "@/lib/authorization";
 
 import {
     Container,
     Heading,
 } from "@chakra-ui/react";
 
-
-
-export default function Orders() {
+ function Orders() {
     return (
         <>
             <HeadAdmin />
@@ -27,3 +26,4 @@ export default function Orders() {
     );
 }
 
+export default withAuth(Orders)
