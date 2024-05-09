@@ -1,18 +1,19 @@
 import { HeadAdmin } from "@/components/HeadAdmin";
-import { NavbarAdmin } from "@/components/NavbarAdmin";
+import { SidebarMenu } from "@/components/SidebarMenu";
 import { FormProductAdd } from "@/components/form/FormProductAdd";
 import { withAuth } from "@/lib/authorization";
-import { Container } from "@chakra-ui/react";
+import { Container, Flex } from "@chakra-ui/react";
 
 function ProductAdd() {
   return (
     <>
       <HeadAdmin />
       <main>
-        <NavbarAdmin />
-        <Container maxW="80%">
+      <Flex>
+                <SidebarMenu flex={1} /> <Container maxW="80%">
           <FormProductAdd />
-        </Container>
+        </Container>   </Flex>
+       
       </main>
     </>
   );

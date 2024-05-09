@@ -1,4 +1,6 @@
 import {
+  Alert,
+  AlertIcon,
   Box,
   Button,
   Center,
@@ -185,20 +187,30 @@ export function TableOrders(status) {
     <>
       <Box p={8} borderWidth="1px" borderRadius="lg" overflow="hidden">
         <TableContainer>
-          <Table variant='striped'>
+          <Table variant="striped">
             <Thead>
               <Tr>
                 <Th>No</Th>
                 <Th>Customer</Th>
                 <Th>Address</Th>
-                <Th><Center>Status</Center></Th>
-                <Th rowSpan={2} isNumeric>
-                <Text>Ordered At</Text> <Text>Finsihed At</Text>
+                <Th>
+                  <Center>Status</Center>
                 </Th>
-               
+                <Th rowSpan={2} isNumeric>
+                  <Text>Ordered At</Text> <Text>Finsihed At</Text>
+                </Th>
+
                 <Th></Th>
               </Tr>
-            </Thead>
+            </Thead>{" "}
+            {dataOrder?.data.values.length == 0 ? (
+              <Alert status="info">
+                <AlertIcon />
+                There's No Order
+              </Alert>
+            ) : (
+              ""
+            )}
             <Tbody>
               {dataOrder?.data.values.map((item) => (
                 <Tr key={item.id_history}>
@@ -212,7 +224,7 @@ export function TableOrders(status) {
                     <Text>{item.phone}</Text>
                   </Td>
                   <Td>
-                   <Center>
+                    <Center>
                       {item.status === 0 && (
                         <Button
                           colorScheme="grey"
@@ -296,20 +308,20 @@ export function TableOrders(status) {
                           px={4}
                           h={8}
                         >
-                         Done
+                          Done
                         </Button>
                       )}
-                      </Center>
-                  
+                    </Center>
                   </Td>
                   <Td isNumeric>
-                    <Text>{formatDate(item.ordered_at)}</Text><Text>
+                    <Text>{formatDate(item.ordered_at)}</Text>
+                    <Text>
                       {item.finished_at
                         ? formatDate(item.finished_at)
                         : "Not Yet Finished"}
                     </Text>
                   </Td>
-                 
+
                   <Td>
                     <InfoOutlineIcon
                       onClick={() => {

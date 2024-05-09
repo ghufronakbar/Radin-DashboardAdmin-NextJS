@@ -59,7 +59,7 @@ export function TableProduct() {
 
   const handleDelete = async (id_product) => {
     try {
-      await axiosInstance.delete(`/product/product/${id_product}`);
+      await axiosInstance.delete(`/product/delete/${id_product}`);
       toast({
         title: "Menu has been deleted",
         status: "warning",

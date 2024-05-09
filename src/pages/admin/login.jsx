@@ -36,7 +36,7 @@ function Login() {
         localStorage.setItem("token", token);
         // Redirect to dashboard or other page
         toast({
-          title: "Login Berhasil",
+          title: "Login Successfully",
           status: "success",
         });
 

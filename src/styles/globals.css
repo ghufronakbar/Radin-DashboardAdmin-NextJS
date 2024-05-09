@@ -105,3 +105,14 @@ a {
     color-scheme: dark;
   }
 }
+
+.sidebar {
+  position: fixed; /* Tetap pada tempatnya */
+  top: 0;
+  left: 0;
+  height: 100%; /* Set tinggi menjadi 100% */
+  width: 250px; /* Atur lebar sesuai kebutuhan Anda */
+  background-color: #f0f0f0; /* Atur warna latar belakang sesuai keinginan Anda */
+  overflow-y: auto; /* Mengaktifkan scroll hanya jika diperlukan */
+  z-index: 100; /* Pastikan z-index lebih tinggi dari konten lainnya */
+}

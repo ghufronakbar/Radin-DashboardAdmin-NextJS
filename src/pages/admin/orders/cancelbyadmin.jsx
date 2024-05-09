@@ -1,30 +1,28 @@
-
 import { HeadAdmin } from "@/components/HeadAdmin";
 import { NavbarAdmin } from "@/components/NavbarAdmin";
+import { SidebarMenu } from "@/components/SidebarMenu";
 import { TableOrders } from "@/components/table/TableOrders";
 import { withAuth } from "@/lib/authorization";
 
-import {
-    Container,
-    Heading,
-} from "@chakra-ui/react";
-
+import { Container, Flex, Heading } from "@chakra-ui/react";
 
 function CancelByAdmin() {
-    return (
-        <>
-            <HeadAdmin />
-            <main>
-                <NavbarAdmin />
-                <Container maxW="80%">
-                    <Heading marginBottom="8" marginTop="8">
-                        Data Orders
-                    </Heading>
-                   {TableOrders(2)}
-                </Container>
-            </main>
-        </>
-    );
+  return (
+    <>
+      <HeadAdmin />
+      <main>
+        <Flex>
+          <SidebarMenu flex={1} />{" "}  <Container maxW="80%">
+          <Heading marginBottom="8" marginTop="8">
+            Data Orders
+          </Heading>
+          {TableOrders(2)}
+        </Container>
+        </Flex>
+      
+      </main>
+    </>
+  );
 }
 
-export default withAuth(CancelByAdmin)
+export default withAuth(CancelByAdmin);
