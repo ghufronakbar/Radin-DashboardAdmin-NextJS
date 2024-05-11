@@ -7,6 +7,7 @@ import {
   Flex,
   FormControl,
   FormLabel,
+  HStack,
   Image,
   Input,
   Modal,
@@ -18,6 +19,7 @@ import {
   ModalOverlay,
   Spacer,
   Table,
+  TableCaption,
   TableContainer,
   Tbody,
   Td,
@@ -50,7 +52,10 @@ export function TableOrders(status) {
   const [isOpenInfo, setIsOpenInfo] = useState(false);
   const [userNotes, setUserNotes] = useState(false);
   const [adminNotes, setAdminNotes] = useState(false);
+  const [itemHistory, setItemHistory] = useState(false);
   let i = 1;
+  let subtotal = 0;
+  let total = 0;
 
   const { data: dataOrder, refetch: refetchDataOrder } = useQuery({
     queryKey: ["orders"],
@@ -328,6 +333,40 @@ export function TableOrders(status) {
                         setIsOpenInfo(true);
                         setUserNotes(item.user_notes);
                         setAdminNotes(item.admin_notes);
+                        setItemHistory(
+                          <>
+                            <Table>
+                              <Thead>
+                                <Th>Product</Th>
+                                <Th>Amount</Th>
+                                <Th>Price</Th>
+                                <Th>Total</Th>
+                              </Thead>
+                              <Tbody>
+                                {item.item_history.map((item_history) => {
+                                  // Hitung subtotal
+                                  const subtotal =
+                                    item_history.amount * item_history.price;
+                                  // Tambahkan ke total
+                                  total += subtotal;
+                                  return (
+                                    <Tr key={item_history.id_item_history}>
+                                      <Td>{item_history.name_product}</Td>
+                                      <Td>{item_history.amount}</Td>
+                                      <Td>{item_history.price}</Td>
+                                      <Td>Rp {subtotal}</Td>
+                                    </Tr>
+                                  );
+                                })}
+                              </Tbody>
+                              <Tr>
+                                <Th>Total</Th>
+                                <Th>Rp {total}</Th>
+                              </Tr>
+                              <TableCaption>Include tax and shipping cost</TableCaption>
+                            </Table>
+                          </>
+                        );
                       }}
                     />
                   </Td>
@@ -429,7 +468,7 @@ export function TableOrders(status) {
           </ModalFooter>
         </ModalContent>
       </Modal>
-      <Modal isOpen={isOpenInfo} onClose={() => setIsOpenInfo(false)}>
+      <Modal isOpen={isOpenInfo} onClose={() => setIsOpenInfo(false)} size="xl">
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>Notes</ModalHeader>
@@ -441,6 +480,10 @@ export function TableOrders(status) {
           <ModalBody>
             <Text as="b">Admin:</Text>
             <Text>{adminNotes}</Text>
+          </ModalBody>
+          <ModalBody>
+            <Text as="b">Items:</Text>
+            <Text>{itemHistory}</Text>
           </ModalBody>
           <ModalFooter></ModalFooter>
         </ModalContent>
