@@ -53,6 +53,8 @@ export function TableOrders(status) {
   const [userNotes, setUserNotes] = useState(false);
   const [adminNotes, setAdminNotes] = useState(false);
   const [itemHistory, setItemHistory] = useState(false);
+  const [totalHistory, setTotalHistory] = useState(false);
+
   let i = 1;
   let subtotal = 0;
   let total = 0;
@@ -327,12 +329,12 @@ export function TableOrders(status) {
                     </Text>
                   </Td>
 
-                  <Td>
+                  <Td>                  
                     <InfoOutlineIcon
                       onClick={() => {
-                        setIsOpenInfo(true);
                         setUserNotes(item.user_notes);
                         setAdminNotes(item.admin_notes);
+                        setIsOpenInfo(true);
                         setItemHistory(
                           <>
                             <Table>
@@ -340,7 +342,7 @@ export function TableOrders(status) {
                                 <Th>Product</Th>
                                 <Th>Amount</Th>
                                 <Th>Price</Th>
-                                <Th>Total</Th>
+                                <Th>SubTotal</Th>
                               </Thead>
                               <Tbody>
                                 {item.item_history.map((item_history) => {
@@ -361,7 +363,7 @@ export function TableOrders(status) {
                               </Tbody>
                               <Tr>
                                 <Th>Total</Th>
-                                <Th>Rp {total}</Th>
+                                <Th>Rp {item.total}</Th>
                               </Tr>
                               <TableCaption>Include tax and shipping cost</TableCaption>
                             </Table>
@@ -468,7 +470,12 @@ export function TableOrders(status) {
           </ModalFooter>
         </ModalContent>
       </Modal>
-      <Modal isOpen={isOpenInfo} onClose={() => setIsOpenInfo(false)} size="xl">
+      <Modal isOpen={isOpenInfo} onClose={() => {setIsOpenInfo(false);
+          setTotalHistory(false);
+          setUserNotes(false);
+          setAdminNotes(false);
+          setItemHistory(false)
+      }} size="xl">
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>Notes</ModalHeader>
